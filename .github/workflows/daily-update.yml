@@ -2,8 +2,11 @@ name: Daily Repository Update
 
 on:
   schedule:
-    - cron: '17 3 * * *'   # Runs daily at 03:17 UTC (change minute if needed)
+    - cron: '17 3 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write   # 🔥 THIS FIXES THE 403 ERROR
 
 jobs:
   update:
@@ -19,5 +22,5 @@ jobs:
           git config --global user.name "DevSync Bot"
           git config --global user.email "22f3000965@ds.study.iitm.ac.in"
           git add daily-log.txt
-          git commit -m "Automated daily update: $(date)" || echo "No changes to commit"
+          git commit -m "Automated daily update: $(date)" || echo "No changes"
           git push
